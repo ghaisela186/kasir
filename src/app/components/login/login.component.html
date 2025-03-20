@@ -1,0 +1,41 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4" style="width: 400px;">
+    <h3 class="text-center mb-3">Login</h3>
+    <form (ngSubmit)="login()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="contoh@email.com"
+          required
+          (input)="clearError()"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Masukkan password"
+          required
+          (input)="clearError()"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+
+      <!-- Tampilkan pesan error jika ada -->
+      <div *ngIf="loginError" class="alert alert-danger mt-3">
+        {{ loginError }}
+      </div>
+    </form>
+  </div>
+</div>

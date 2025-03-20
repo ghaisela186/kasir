@@ -1,0 +1,55 @@
+<div class="laporan">
+  <!-- Toolbar Judul Halaman -->
+  <div class="toolbar">
+    <h1>Laporan Penjualan</h1>
+    <button class="btn-export" (click)="exportExcel()">Export Excel</button>
+    </div>
+  </div>
+
+  <!-- Filter Tanggal -->
+  <div class="filter-section">
+    <label for="startDate">Dari Tanggal:</label>
+    <input type="date" id="startDate" [(ngModel)]="startDate" />
+
+    <label for="endDate">Sampai Tanggal:</label>
+    <input type="date" id="endDate" [(ngModel)]="endDate" />
+
+    <button class="btn-filter" (click)="getLaporan()">Filter</button>
+    <button class="btn-reset" (click)="resetFilter()">Reset</button>
+  </div>
+
+  <!-- Tabel Laporan -->
+  <div class="table-container" id="laporan-print">
+    <table *ngIf="laporan.length > 0" class="laporan-table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>ID Penjualan</th>
+          <th>Tanggal</th>
+          <th>Kasir</th>
+          <th>Pelanggan</th>
+          <th>Diskon</th>
+          <th>Total Harga</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaksi of laporan; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ transaksi.id_penjualan }}</td>
+          <td>{{ transaksi.tanggal_penjualan | date: 'short' }}</td>
+          <td>{{ transaksi.nama_user }}</td>
+          <td>{{ transaksi.nama_pelanggan || 'Umum' }}</td>
+          <td>{{ transaksi.diskon }}%</td>
+          <td>Rp {{ transaksi.total_harga | number }}</td>
+          <td>
+            <button class="btn-detail" (click)="lihatDetail(transaksi.id_penjualan)">Detail</button>
+            <button class="btn-export" (click)="cetakLaporan()">Cetak</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pesan ketika tidak ada data -->
+    <p *ngIf="laporan.length === 0" class="no-data">Tidak ada data transaksi.</p>
+  </div>

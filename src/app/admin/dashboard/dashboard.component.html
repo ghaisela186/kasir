@@ -1,0 +1,80 @@
+<div class="dashboard-admin">
+  <div class="stok-menipis-notification" *ngIf="stokMenipis.length > 0">
+    <div class="alert alert-warning">
+      <strong>⚠️ Peringatan Stok Menipis!</strong>
+      <ul>
+        <li *ngFor="let item of stokMenipis">
+          {{ item.nama_produk }} - Stok Tersisa: {{ item.stok }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="stat-cards">
+    <div class="card bg-blue">
+      <div class="icon">🛒</div>
+      <h2>{{ totalPenjualan }}</h2>
+      <p>Total Penjualan</p>
+    </div>
+    <div class="card bg-green">
+      <div class="icon">👥</div>
+      <h2>{{ jumlahMember }}</h2>
+      <p>Jumlah Member</p>
+    </div>
+    <div class="card bg-yellow">
+      <div class="icon">📦</div>
+      <h2>{{ totalProduk }}</h2>
+      <p>Total Produk</p>
+    </div>
+    <div class="card bg-red">
+      <div class="icon">💰</div>
+      <h2>Rp {{ totalPendapatan | number }}</h2>
+      <p>Total Pendapatan</p>
+    </div>
+  </div>
+
+  <!-- Grafik Penjualan -->
+  <div class="chart-container">
+    <div class="chart-header">
+      <h3>Grafik Penjualan</h3>
+      <select [(ngModel)]="selectedMode" (change)="onModeChange()">
+        <option value="bulanan">Bulanan</option>
+        <option value="tahunan">Tahunan</option>
+      </select>
+    </div>
+  
+    <canvas
+      baseChart
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [legend]="true"
+      type="line">
+    </canvas>
+  </div>
+  
+  
+
+  <!-- Transaksi Terbaru -->
+  <div class="recent-transactions">
+    <h3>Transaksi Terbaru</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Pelanggan</th>
+          <th>Total</th>
+          <th>Tanggal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaksi of transaksiTerbaru">
+          <td>{{ transaksi.id_penjualan }}</td>
+          <td>{{ transaksi.nama_pelanggan }}</td>
+          <td>Rp {{ transaksi.total_harga | number }}</td>
+          <td>{{ transaksi.tanggal_penjualan | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="kategori">
+  <div class="toolbar">
+    <h1>Kategori</h1>
+    <!-- Tombol Tambah kategori -->
+    <button class="btn-tambah" (click)="openTambahModal()">Tambah Kategori</button>
+  </div>
+
+  <!-- Table Data kategori -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Kategori</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let kategori of kategoriList">
+          <td>{{ kategori.id_kategori }}</td>
+          <td>{{ kategori.nama_kategori }}</td>
+          <td>
+            <button class="btn-edit" (click)="openEditModal(kategori)">Edit</button>
+            <button class="btn-delete" (click)="hapusKategori(kategori.id_kategori)">Hapus</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal untuk Tambah / Edit kategori -->
+  <div class="modal" [ngClass]="{'show': isModalOpen}">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">×</span>
+      <h2>{{ modalTitle }}</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div>
+          <label for="id_kategori">ID Kategori:</label>
+          <input type="text" id="id_kategori" [(ngModel)]="formData.id_kategori" name="id_kategori" required [readonly]="isEditMode" />
+        </div>
+        <div>
+          <label for="nama_kategori">Nama Kategori:</label>
+          <input type="text" id="nama_kategori" [(ngModel)]="formData.nama_kategori" name="nama_kategori" required />
+        </div>
+        <button type="submit">{{ isEditMode ? 'Update' : 'Tambah' }} kategori</button>
+      </form>
+    </div>
+  </div>
+</div>

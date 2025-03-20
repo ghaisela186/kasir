@@ -1,0 +1,158 @@
+<div class="transaksi-container">
+  <h2>Transaksi Penjualan</h2>
+
+  <!-- Pencarian Pelanggan -->
+  <div class="pelanggan-section">
+    <label for="pelanggan">Pelanggan:</label>
+
+    <div class="input-wrapper">
+      <input
+        type="text"
+        id="pelanggan"
+        [(ngModel)]="inputPelanggan"
+        (input)="filterPelanggan()"
+        placeholder="Cari pelanggan..."
+      />
+
+      <ul class="dropdown-list" *ngIf="filteredPelanggan.length && inputPelanggan">
+        <li
+          *ngFor="let pelanggan of filteredPelanggan"
+          (click)="pilihPelanggan(pelanggan)"
+        >
+          {{ pelanggan.nama_pelanggan }}
+        </li>
+      </ul>
+    </div>
+
+    <button
+      *ngIf="selectedPelanggan"
+      class="hapus"
+      (click)="resetPelanggan()"
+    >
+      Reset Pelanggan
+    </button>
+  </div>
+
+  <!-- Input Kode Barang -->
+  <div class="input-section">
+    <input
+      type="text"
+      [(ngModel)]="kodeBarang"
+      (keyup.enter)="cariBarang()"
+      placeholder="Scan atau masukkan kode barang"
+    />
+    <button (click)="cariBarang()">Tambah</button>
+  </div>
+
+  <!-- Tabel Barang -->
+  <table *ngIf="daftarBarang.length > 0" class="barang-table">
+    <thead>
+      <tr>
+        <th>Nama Barang</th>
+        <th>Harga</th>
+        <th>Diskon (%)</th>
+        <th>Diskon (Rp)</th> <!-- Kolom baru -->
+        <th>Jumlah</th>
+        <th>Subtotal</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let barang of daftarBarang; let i = index">
+        <td>{{ barang.nama_produk }}</td>
+        <td>Rp {{ barang.harga_jual | number }}</td>
+        <td>{{ barang.diskon_barang || 0 }}%</td>
+        <td>Rp {{ barang.diskon_nominal * barang.jumlah | number }}</td> <!-- Diskon rupiah x jumlah -->
+        <td>
+          <button (click)="kurangiJumlah(i)" [disabled]="barang.jumlah <= 1">-</button>
+          {{ barang.jumlah }}
+          <button (click)="tambahJumlah(i)" [disabled]="barang.jumlah >= barang.stok">+</button>
+        </td>
+        <td>Rp {{ barang.subtotal | number }}</td>
+        <td><button (click)="hapusBarang(i)">Hapus</button></td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+  <!-- Total dan Pembayaran -->
+  <div class="total-section">
+    <div class="diskon-member">
+      <label>Diskon Member (%):</label>
+      <input
+        type="number"
+        [(ngModel)]="diskonMember"
+        [disabled]="true"
+        class="diskon-input"
+      />
+    </div>
+
+    <p><strong>Total Harga:</strong> Rp {{ totalHarga | number }}</p>
+
+    <div class="uang-diberikan">
+      <label for="uangDiberikan">Uang Diberikan:</label>
+      <input
+        type="number"
+        [(ngModel)]="uangDiberikan"
+        (input)="hitungTotal()"
+      />
+    </div>
+
+    <p><strong>Kembalian:</strong> Rp {{ kembalian | number }}</p>
+
+    <button class="proses-btn" (click)="prosesTransaksi()">Bayar</button>
+  </div>
+
+  <!-- Modal Nota -->
+<div *ngIf="isNotaOpen" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="tutupNota()">×</span>
+    <h2>Nota Pembelian</h2>
+
+    <div id="nota-print" class="nota-container">
+      <p><strong>Tanggal:</strong> {{ notaData?.tanggal_penjualan }}</p>
+      <p><strong>Kasir:</strong> {{ notaData?.nama_user }}</p>
+      <p><strong>Pelanggan:</strong> {{ notaData?.nama_pelanggan || 'Umum' }}</p>
+      
+      <hr />
+
+      <!-- Daftar Barang -->
+      <div *ngFor="let item of notaData?.items" class="nota-item">
+        <div class="item-header">
+          <span class="item-name">{{ item.nama_produk }}</span>
+          <span class="item-total">Rp {{ item.subtotal | number }}</span>
+        </div>
+        <div class="item-detail">
+          {{ item.jumlah }} x Rp {{ item.harga_jual | number }}
+          <span *ngIf="item.diskon_barang">| Diskon: {{ item.diskon_barang }}% (Rp {{ item.diskon_nominal * item.jumlah | number }})</span>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Ringkasan -->
+      <div class="nota-summary">
+        <div class="summary-row">
+          <span>Diskon Member</span>
+          <span>{{ notaData?.diskon }}%</span>
+        </div>
+        <div class="summary-row">
+          <span>Total</span>
+          <span>Rp {{ notaData?.total_harga | number }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Tunai</span>
+          <span>Rp {{ notaData?.uang_dibayar | number }}</span>
+        </div>
+        <div class="summary-row kembalian">
+          <span>Kembalian</span>
+          <span>Rp {{ notaData?.kembalian | number }}</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="cetak-nota" (click)="cetakNota()">Cetak Nota</button>
+  </div>
+</div>
+  </div>
+

@@ -1,0 +1,107 @@
+<div class="pendataan-barang">
+  <div class="toolbar">
+    <h1>Data Produk</h1>
+    <button class="btn-tambah" (click)="tambahProduk()">Tambah Data Barang</button>
+  </div>
+
+  <!-- Table Data Produk -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ID Kategori</th>
+          <th>Nama Produk</th>
+          <th>Harga Beli</th>
+          <th>Harga Jual</th>
+          <th>Diskon Barang (%)</th>
+          <th>Stok</th>
+          <th>Barcode</th>
+          <th>Create at</th>
+          <th>Update at</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produk of produkList">
+          <td>{{ produk.id_produk }}</td>
+          <td>{{ produk.id_kategori }}</td>
+          <td>{{ produk.nama_produk }}</td>
+          <td>Rp {{ produk.harga_beli | number:'1.0-0' }}</td>
+          <td>Rp {{ produk.harga_jual | number:'1.0-0' }}</td>
+          <td>{{ produk.diskon_barang }}%</td>
+          <td>{{ produk.stok }}</td>
+          <td>{{ produk.barcode }}</td>
+          <td>{{ produk.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ produk.updated_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>
+            <button class="btn-edit" (click)="openEditModal(produk)">Edit</button>
+            <button class="btn-delete" (click)="hapusProduk(produk.id_produk)">Hapus</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Tambah / Edit Produk -->
+  <div class="modal" [ngClass]="{'show': isModalOpen}">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">×</span>
+      <h2>{{ modalTitle }}</h2>
+
+      <form (ngSubmit)="onSubmit()">
+        <!-- Kategori -->
+        <div class="form-group">
+          <label for="id_kategori">Kategori:</label>
+          <select id="id_kategori" [(ngModel)]="formData.id_kategori" name="id_kategori" required>
+            <option value="">-- Pilih Kategori --</option>
+            <option *ngFor="let kategori of kategoriList" [value]="kategori.id_kategori">
+              {{ kategori.nama_kategori }}
+            </option>
+          </select>
+          <div *ngIf="kategoriList.length === 0" class="info">Belum ada kategori tersedia!</div>
+        </div>
+
+        <!-- Nama Produk -->
+        <div class="form-group">
+          <label for="nama_produk">Nama Produk:</label>
+          <input type="text" id="nama_produk" [(ngModel)]="formData.nama_produk" name="nama_produk" required>
+        </div>
+
+        <!-- Harga Beli -->
+        <div class="form-group">
+          <label for="harga_beli">Harga Beli:</label>
+          <input type="number" id="harga_beli" [(ngModel)]="formData.harga_beli" name="harga_beli" required>
+        </div>
+
+        <!-- Harga Jual -->
+        <div class="form-group">
+          <label for="harga_jual">Harga Jual:</label>
+          <input type="number" id="harga_jual" [(ngModel)]="formData.harga_jual" name="harga_jual" required>
+        </div>
+
+        <!-- Diskon Barang -->
+        <div class="form-group">
+          <label for="diskon_barang">Diskon Barang (%):</label>
+          <input type="number" id="diskon_barang" [(ngModel)]="formData.diskon_barang" name="diskon_barang" min="0" max="100" required>
+        </div>
+
+        <!-- Stok -->
+        <div class="form-group">
+          <label for="stok">Stok:</label>
+          <input type="number" id="stok" [(ngModel)]="formData.stok" name="stok" required>
+        </div>
+
+        <!-- Barcode -->
+        <div class="form-group">
+          <label for="barcode">Barcode:</label>
+          <input type="text" id="barcode" [(ngModel)]="formData.barcode" name="barcode">
+        </div>
+
+        <button type="submit" class="btn-submit">
+          {{ isEditMode ? 'Update' : 'Tambah' }} Barang
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

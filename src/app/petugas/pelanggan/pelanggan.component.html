@@ -1,0 +1,61 @@
+<div class="pelanggan">
+  <div class="toolbar">
+    <h1>Data Member</h1>
+    <!-- Tombol Tambah Pelanggan -->
+    <button class="btn-tambah" (click)="openTambahModal()">Tambah Pelanggan</button>
+  </div>
+
+  <!-- Table Data Pelanggan -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama Pelanggan</th>
+          <th>Alamat</th>
+          <th>Nomor Telepon</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pelanggan of pelangganList">
+          <td>{{ pelanggan.id_pelanggan }}</td>
+          <td>{{ pelanggan.nama_pelanggan }}</td>
+          <td>{{ pelanggan.alamat }}</td>
+          <td>{{ pelanggan.hp }}</td>
+          <td>
+            <button class="btn-edit" (click)="openEditModal(pelanggan)">Edit</button>
+            <button class="btn-delete" (click)="hapusPelanggan(pelanggan.id_pelanggan)">Hapus</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal untuk Tambah / Edit Pelanggan -->
+  <div class="modal" [ngClass]="{'show': isModalOpen}">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">×</span>
+      <h2>{{ modalTitle }}</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div>
+          <label for="nama">Nama Pelanggan:</label>
+          <input type="text" id="nama" [(ngModel)]="formData.nama_pelanggan" name="nama_pelanggan" required />
+        </div>
+      
+        <div>
+          <label for="alamat">Alamat:</label>
+          <input type="text" id="alamat" [(ngModel)]="formData.alamat" name="alamat" required />
+        </div>
+      
+        <div>
+          <label for="hp">Nomor Telepon:</label>
+          <input type="text" id="hp" [(ngModel)]="formData.hp" name="hp" required />
+        </div>
+      
+        <button type="submit">{{ isEditMode ? 'Update' : 'Tambah' }} Pelanggan</button>
+      </form>
+      
+    </div>
+  </div>
+</div>

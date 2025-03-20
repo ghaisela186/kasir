@@ -1,0 +1,382 @@
+:root {
+  --primary-bg: #2b2d42;
+  --secondary-bg: #ffffff;
+  --primary-color: #007bff;
+  --header-bg: #004080; /* Warna biru tua agar lebih kontras */
+  --secondary-color: #6c757d;
+  --danger-color: #dc3545;
+  --text-dark: #212529;
+  --text-light: #f8f9fa;
+}
+
+body {
+  background-color: var(--primary-bg);
+  font-family: 'Poppins', sans-serif;
+}
+
+.transaksi-container {
+  padding: 20px;
+  background: var(--secondary-bg);
+  max-width: 750px;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  color: var(--text-dark);
+}
+
+h2 {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  font-size: 16px;
+  color: var(--text-dark);
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--secondary-color);
+}
+
+button {
+  padding: 10px 15px;
+  background: var(--primary-color);
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #00bcd4;
+}
+
+button.hapus {
+  background: var(--danger-color);
+}
+
+button.hapus:hover {
+  background: #b02a37;
+}
+
+/* ========== 📌 Perbaikan pada TABEL ========== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: #ffffff;
+}
+
+th {
+  background: var(--header-bg); /* Warna header biru tua */
+  color: var(--text-light);
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ccc;
+}
+
+td {
+  background: var(--secondary-bg);
+  color: var(--text-dark);
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd; /* Border lebih jelas */
+}
+
+td.jumlah {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Tombol + dan - */
+button.btn-minus, button.btn-plus {
+  background: var(--primary-color);
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
+button.btn-minus:hover, button.btn-plus:hover {
+  background: #00bcd4;
+}
+
+.summary, .payment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+input[type="number"] {
+  width: 110px;
+  padding: 8px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+
+.proses-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary-color);
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.proses-btn:hover {
+  background: #00bcd4;
+}
+
+.pelanggan-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pelanggan-section label {
+  font-size: 16px;
+  font-weight: bold;
+  width: 140px; /* Lebar agar sejajar dengan input */
+}
+
+.input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  background: white;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* 🔽 Dropdown List Item Styling */
+.dropdown-list li {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  color: var(--text-dark);
+  transition: background 0.3s, color 0.3s;
+}
+
+.dropdown-list li:last-child {
+  border-bottom: none;
+}
+
+/* Hover effect untuk item */
+.dropdown-list li:hover {
+  background-color: var(--primary-color);
+  color: black;
+}
+
+/* Jika ada class aktif (dipilih) */
+.dropdown-list li.active {
+  background-color: #00bcd4;
+  color: black;
+  font-weight: bold;
+}
+
+/* Scrollbar custom (opsional, biar makin halus) */
+.dropdown-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 6px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+  background: #00bcd4;
+}
+
+.dropdown-list {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.input-wrapper input:focus + .dropdown-list,
+.input-wrapper .dropdown-list:hover {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 🔹 Overlay background modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  /* Hapus overflow-y & max-height dari sini */
+}
+
+/* 🔹 Isi modal */
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+
+  /* Tambahan untuk fix tingginya */
+  max-height: 90vh; /* Modal content maksimal 90% tinggi viewport */
+  overflow-y: auto; /* Biar scroll muncul kalau konten panjang */
+}
+
+/* 🔹 Tombol X */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--danger-color);
+  z-index: 10; /* Tambahin z-index buat jaga-jaga */
+}
+
+.close:hover {
+  color: black;
+}
+
+
+.cetak-nota {
+  background: var(--primary-color);
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cetak-nota:hover {
+  background: #00bcd4;
+}
+
+/* ====== NOTA STYLE ====== */
+.nota-container {
+  text-align: left;
+  font-size: 14px;
+  color: var(--text-dark);
+  padding: 10px 0;
+}
+
+.nota-container hr {
+  border: 0;
+  border-top: 1px dashed #ccc;
+  margin: 10px 0;
+}
+
+.nota-item {
+  margin-bottom: 10px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.item-name {
+  max-width: 200px;
+}
+
+.item-total {
+  white-space: nowrap;
+}
+
+.item-detail {
+  font-size: 13px;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+.nota-summary {
+  margin-top: 15px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.summary-row.kembalian {
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+/* Buat hasil cetakan */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .modal-content, .modal-content * {
+    visibility: visible;
+  }
+  .modal-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+

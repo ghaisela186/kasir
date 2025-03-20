@@ -1,0 +1,49 @@
+<div *ngIf="!isLoginPage && isLoggedIn">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <a class="navbar-brand">📚 KASIER</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="/barang" routerLinkActive="active">Product</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="/kategori" routerLinkActive="active">Kategori</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="/user" routerLinkActive="active">Users</a>
+        </li>
+        <li class="nav-item" *ngIf="isPetugas()">
+          <a class="nav-link" routerLink="/pelanggan" routerLinkActive="active">Member</a>
+        </li>
+        <li class="nav-item" *ngIf="isPetugas()">
+          <a class="nav-link" routerLink="/transaksi" routerLinkActive="active">Transaksi</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin() || isPetugas()">
+          <a class="nav-link" routerLink="/laporan" routerLinkActive="active">Report</a>
+        </li>
+      </ul>
+
+      <div class="navbar-text text-white mr-3" *ngIf="username">
+        👤 {{ username }}
+      </div>
+
+      <button class="btn btn-outline-light logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+</div>
+
+<router-outlet></router-outlet>

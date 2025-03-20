@@ -1,0 +1,223 @@
+/* Halaman Laporan Penjualan */
+.laporan {
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  color: #333;
+}
+
+.toolbar {
+  background-color: rgb(6, 138, 172);
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar h1 {
+  margin: 0;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.tambah-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-export {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-export:hover {
+  background-color: #218838;
+}
+
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.filter-section label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.filter-section input[type="date"] {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.filter-section input[type="date"]:focus {
+  border-color: rgb(6, 138, 172);
+  box-shadow: 0 0 6px rgba(6, 138, 172, 0.5);
+}
+
+.btn-filter,
+.btn-reset {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 25px;
+  border: none;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.btn-filter {
+  background-color: rgb(6, 138, 172);
+  color: #fff;
+}
+
+.btn-filter:hover {
+  background-color: rgb(0, 110, 140);
+}
+
+.btn-reset {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-reset:hover {
+  background-color: #a71b2a;
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgb(73, 77, 88);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border: none;
+  font-size: 14px;
+}
+
+th {
+  background-color: rgb(6, 138, 172);
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #2d3241;
+}
+
+tr:hover {
+  background-color: #353b4d;
+}
+
+td {
+  color: #e0e0e0;
+}
+
+.btn-detail {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  background-color: #0d6efd;
+  color: white;
+}
+
+.btn-detail:hover {
+  background-color: #0056d2;
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-section {
+    flex-direction: column;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  .btn-filter,
+  .btn-reset,
+  .btn-export {
+    width: 100%;
+  }
+
+  .btn-detail {
+    font-size: 10px;
+  }
+
+  .btn-export {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-export:hover {
+    background-color: #218838;
+  }
+  
+}

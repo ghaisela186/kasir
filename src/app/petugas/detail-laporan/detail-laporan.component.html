@@ -1,0 +1,40 @@
+<div class="detail-laporan">
+  <div class="toolbar">
+    <h1>Detail Transaksi Penjualan</h1>
+    <button class="btn-back" (click)="goBack()">Kembali</button>
+  </div>
+
+  <div *ngIf="transaksiInfo" class="info-transaksi">
+    <p><strong>ID Penjualan:</strong> {{ transaksiInfo.id_penjualan }}</p>
+    <p><strong>Tanggal:</strong> {{ transaksiInfo.tanggal_penjualan | date: 'dd MMMM yyyy, HH:mm' }}</p>
+    <p><strong>Kasir:</strong> {{ transaksiInfo.nama_user }}</p>
+    <p><strong>Pelanggan:</strong> {{ transaksiInfo.nama_pelanggan || 'Umum' }}</p>
+    <p><strong>Diskon Member:</strong> {{ transaksiInfo.diskon }}%</p>
+    <p><strong>Total Harga:</strong> Rp {{ transaksiInfo.total_harga | number:'1.0-0' }}</p>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Produk</th>
+          <th>Harga Jual</th>
+          <th>Qty</th>
+          <th>Diskon Barang (%)</th> <!-- ✅ Diskon barang -->
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of detailLaporan; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.nama_produk }}</td>
+          <td>Rp {{ item.harga_jual | number:'1.0-0' }}</td>
+          <td>{{ item.qty }}</td>
+          <td>{{ item.diskon_barang }}%</td>
+          <td>Rp {{ item.sub_total | number:'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
